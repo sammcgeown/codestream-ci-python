@@ -6,8 +6,7 @@ RUN     yum -y install https://dl.fedoraproject.org/pub/epel/epel-release-latest
         yum install jq -y
 
 # Install TMC CLI
-RUN     LINKS=$(curl https://smcgorg.tmc.cloud.vmware.com/v1alpha/system/binaries | jq '.versions[]') && \
-        LINK=$(echo $LINKS | jq -r '.linuxX64') && \
+RUN     LINK=$(curl -sS https://smcgorg.tmc.cloud.vmware.com/v1alpha/system/binaries | jq -r '.versions[].linuxX64') && \
         wget -nv ${LINK} && \
-        chmod +x ./tmc && \
+        chmod +x tmc && \
         mv tmc /usr/local/bin
