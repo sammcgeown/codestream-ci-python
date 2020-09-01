@@ -9,4 +9,5 @@ RUN     yum -y install https://dl.fedoraproject.org/pub/epel/epel-release-latest
 RUN     LINKS=$(curl https://smcgorg.tmc.cloud.vmware.com/v1alpha/system/binaries | jq '.versions[]') && \
         LINK=$(echo $LINKS | jq -r '.linuxX64') && \
         wget -nv ${LINK} && \
-        chmod +x ./tmc
+        chmod +x ./tmc && \
+        mv tmc /usr/local/bin
